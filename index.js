@@ -14,7 +14,7 @@ client.on("message", async (message) => {
     const command = args.shift().toLowerCase();
     switch (command) {
         case 'whoru':
-            message.channel.send(`A bot, ${message.author}`);
+            message.channel.send(`Just Another Casual Utilty Bot, ${message.author}`);
             break;
         case 'whoami':        
             message.channel.send(`${message.author.username}\n${message.author.id}\n${message.author.createdAt}\n${message.author.displayAvatarURL({ format: 'png', dynamic: true })}`);
