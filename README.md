@@ -1,3 +1,3 @@
 **Just Another Casual Utility Bot**
 
-yep, a bot.
+yep, a Discord bot.
