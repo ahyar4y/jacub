@@ -3,12 +3,12 @@ module.exports = {
     description: 'join',
     async execute(message, args) {
         const voiceChannel = message.member.voice.channel;
-        if (voiceChannel) {
-            if (message.client.voice.connections.some(conn => conn.channel.id === voiceChannel.id)) {
-                return message.channel.send('Already in');
-            }
-            await message.member.voice.channel.join();
+        if (!voiceChannel) {
+            message.channel.send('You are not in a voice channel');
+            return false;
         }
+
+        return await message.member.voice.channel.join();
     }
     
 }

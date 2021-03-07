@@ -1,9 +1,12 @@
+const dotenv = require('dotenv');
 const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+
+dotenv.config();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -15,7 +18,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('ready');
-    client.user.setPresence({ activity: { name: '.cmds', type: 'LISTENING' } });
+    client.user.setPresence({ activity: { name: '.help', type: 'LISTENING' } });
 });
 
 client.on('message', async (message) => {
