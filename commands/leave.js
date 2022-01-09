@@ -1,11 +1,23 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-    name: 'leave',
-    description: 'leave',
-    execute(message, args) {
-        if (!message.guild.me.voice.channel) {
-            return message.channel.send('I\'m not in a voice channel');
-        }
-        
-        message.guild.me.voice.channel.leave();
+    data: new SlashCommandBuilder()
+        .setName('leave')
+        .setDescription('Leave voice channel'),
+    async execute(interaction) {
+        //if (!interaction.guild.me.voice.channel) {
+        //    return interaction.reply('I\'m not in a voice channel');
+        //}
+	const channel = interaction.member.voice.channel;
+	const { getVoiceConnection } = require('@discordjs/voice');
+	const connection = getVoiceConnection(interaction.member.guild.id);
+
+	if (!connection) return await interaction.reply('Not connected to any voice channel');
+
+	connection.destroy();
+
+	await interaction.reply(`Leaving ${channel.name}`);
+
+        //interaction.guild.me.voice.channel.leave();
     }
 }
