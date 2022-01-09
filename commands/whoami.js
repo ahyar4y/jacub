@@ -1,7 +1,10 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-    name: 'whoami',
-    description: 'whoami',
-    execute(message, args) {
-        message.channel.send(`${message.author.username}\n${message.author.id}\n${message.author.createdAt}\n${message.author.displayAvatarURL({ format: 'png', dynamic: true })}`);
-    }
-}
+    data: new SlashCommandBuilder()
+        .setName('whoami')
+        .setDescription('Who you are'),
+    async execute(interaction) {
+        await interaction.reply(`${interaction.user.username}\n${interaction.user.id}\n${interaction.user.createdAt}\n${interaction.user.displayAvatarURL({ dynamic: true })}`);
+    },
+};

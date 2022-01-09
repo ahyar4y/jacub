@@ -1,41 +1,38 @@
 const dotenv = require('dotenv');
 const fs = require('fs');
-const Discord = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 const { prefix, token } = require('./config.json');
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 dotenv.config();
 
+client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
-    client.commands.set(command.name, command);
+    client.commands.set(command.data.name, command);
 }
 
 client.once('ready', () => {
     console.log('ready');
-    client.user.setPresence({ activity: { name: '.help', type: 'LISTENING' } });
+    client.user.setPresence({ activities: [{ name: '.help', type: 'LISTENING' }], status: 'online' });
 });
 
-client.on('message', async (message) => {
-    if (!message.content.startsWith(prefix)) return;
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const cmdName = args.shift().toLowerCase();
+    const command = client.commands.get(interaction.commandName);
 
-    if (!client.commands.has(cmdName)) return;
+    if (!command) return;
 
-    const command = client.commands.get(cmdName);
-    
     try {
-        command.execute(message, args);
+        await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        message.reply('there was an error executing that command');
+        return interaction.reply({ content: 'there was an error executing that command', ephemeral: true});
     }
 });
 

@@ -1,7 +1,10 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-    name: 'whoru',
-    description: 'whoru',
-    execute(message, args) {
-        message.channel.send(`Just Another Casual Utilty Bot, ${message.author}`);
+    data: new SlashCommandBuilder()
+        .setName('whoru')
+        .setDescription('Who JACUB is'),
+    async execute(interaction) {
+        await interaction.reply(`Just Another Casual Utilty Bot, ${interaction.user.username}`);
     }
 }

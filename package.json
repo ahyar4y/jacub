@@ -1,20 +1,32 @@
 {
   "name": "jacub",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Just Another Casual Utility Bot**",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahyar4y/jacub.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahyar4y/jacub/issues"
+  },
+  "homepage": "https://github.com/ahyar4y/jacub#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.4.0",
-    "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0",
-    "ffmpeg-static": "^4.2.7",
-    "googleapis": "^67.1.1",
-    "ytdl-core": "^4.5.0"
+    "@discordjs/builders": "^0.11.0",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "@discordjs/voice": "^0.7.5",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.5.1",
+    "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.4.1",
+    "fs": "^0.0.1-security",
+    "googleapis": "^92.0.0",
+    "libsodium-wrappers": "^0.7.9",
+    "ytdl-core": "^4.9.2"
   }
 }

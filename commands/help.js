@@ -1,15 +1,18 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-    name: 'help',
-    description: 'help',
-    execute(message, args) {
+    data: new SlashCommandBuilder()
+        .setName('help')
+        .setDescription('help'),
+    async execute(interaction) {
         const fs = require('fs');
         const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
         const commands = commandFiles.map(file => {
             file = file.slice(0, file.length - 3);
-            file = '.' + file;
+            file = '/' + file;
             return file;
         });
-        message.channel.send('Available commands:');
-        message.channel.send(commands);
+        await interaction.reply('Available commands:');
+        await interaction.reply(commands);
     }
 }
