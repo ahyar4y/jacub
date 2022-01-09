@@ -6,10 +6,10 @@ module.exports = {
         .setDescription('Who is ..')
         .addUserOption(option => option.setName('user').setDescription('Name of the user').setRequired(true)),
     async execute(interaction) {
-        const userMentioned = interaction.options.get(name);
-        console.log(userMentioned);
+        const userMentioned = interaction.options._hoistedOptions[0].user;
+
         if (!userMentioned) return interaction.reply('Who?');
 
-        //await interaction.reply(`${userMentioned.username}\n${userMentioned.id}\n${userMentioned.createdAt}\n${userMentioned.displayAvatarURL({ dynamic: true })}`);
+        await interaction.reply(`${userMentioned.username}\n${userMentioned.id}\n${userMentioned.createdAt}\n${userMentioned.displayAvatarURL({ dynamic: true })}`);
     }
 }
