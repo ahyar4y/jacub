@@ -18,7 +18,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('ready');
-    client.user.setPresence({ activities: [{ name: '.help', type: 'LISTENING' }], status: 'online' });
+    client.user.setPresence({ activities: [{ name: '/help', type: 'LISTENING' }], status: 'online' });
 });
 
 client.on('interactionCreate', async interaction => {
